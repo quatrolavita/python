@@ -26,10 +26,16 @@ def foll_check(index, bord):
 
 
 def check_winner(bord):
-    pass
+
+    index = 0
+    for i in range(1, 4):
+        if (bord[index*i] == bord[index*i+1]) and (bord[index*i+1] == bord[index*i+2]):
+            if bord[index*i] != '-':
+                return {f'{bord[index*i]}': True}
+    return {f'{bord[index*i]}': False}
 
 
-#Написать функицию которая будет проверять победитетя
+
 
 if __name__ == "__main__":
 
@@ -41,7 +47,7 @@ if __name__ == "__main__":
     for i in range(9):
 
         while True:
-            print(" \nEnter index your turn:", end='')
+            print(" \nEnter index your turn,:", end='')
             try:
                 index = int(input())
                 foll_check(index, bord)
@@ -57,4 +63,8 @@ if __name__ == "__main__":
             break
         print('\n')
         filling_field(bord)
+        if check_winner(bord).values() == True:
+            print(f"Congratulations player {check_winner(bord).items()} become winner!!!")
+            break
+
     print("\n")
